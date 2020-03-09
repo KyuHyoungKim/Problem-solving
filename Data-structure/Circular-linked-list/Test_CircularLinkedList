@@ -1,0 +1,39 @@
+#include"CircularLinkedList.h"
+#include<stdio.h>
+
+int main(void)
+{
+	CLList* TestList = NULL;
+	TestList = CreateCLList();
+	printf("Circular linked list is created successfully\n\n");
+
+	printf("Is it empty? %d\n", isCLListEmpty(TestList));
+	printf("List Length : %d\n", getCLListLenght(TestList));
+	printf("All elements of List : ");
+	ViewAllCLListElements(TestList);
+
+	printf("Add elements in List\n");
+	for (int i = 1; i <= 5; i++)
+		AddCLListElement(TestList, i, i);
+	AddCLListElement(TestList, 3, 6);
+	printf("All elements of List : ");
+	ViewAllCLListElements(TestList);
+	printf("Is it empty? %d\n", isCLListEmpty(TestList));
+	printf("List Length : %d\n\n", getCLListLenght(TestList));
+
+	printf("first element is %d\n", getCLListElement(TestList, 1));
+	printf("second element is %d\n", getCLListElement(TestList, 2));
+	printf("last element is %d\n\n", getCLListElement(TestList, TestList->CurrentElementCount));
+
+	printf("Remove elements in List\n");
+	RemoveCLListElement(TestList, 1);
+	RemoveCLListElement(TestList, 3);
+	RemoveCLListElement(TestList, TestList->CurrentElementCount);
+	printf("List Length : %d\n\n", getCLListLenght(TestList));
+	printf("All elements of List : ");
+	ViewAllCLListElements(TestList);
+	
+	DeleteCLList(TestList);
+
+	return 0;
+}
