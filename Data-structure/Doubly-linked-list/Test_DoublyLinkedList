@@ -1,0 +1,43 @@
+#include"DoublyLinkedList.h"
+#include<stdio.h>
+
+int main(void)
+{
+	DLList* TestList;
+	
+	printf("Create doubly linked list\n");
+	TestList = CreateDLList();
+	printf("Doubly linked list is created succesfully\n\n");
+	
+	printf("Add five Elements in List 1 to 5\n");
+	for (int i = 1; i <= 5; i++)
+		AddDLLElement(TestList, i, i);
+
+	printf("Elements are added in the list succesfully\n");
+	printf("Display Elements : ");
+	DisplayDLListElements(TestList);
+	printf("\nList length : %d\n", getDLLLength(TestList));
+	printf("first elements : %d\n", getDLLElement(TestList, 1));
+	printf("third elements : %d\n", getDLLElement(TestList, 3));
+	printf("last elements : %d\n", getDLLElement(TestList, TestList->CurrentElementCount));
+
+	printf("Add Elements in List\n");
+	AddDLLElement(TestList, 1, 6);
+	AddDLLElement(TestList, 4, 7);
+	printf("Display Elements : ");
+	DisplayDLListElements(TestList);
+
+	printf("\nRemove first, third and last Element in List\n");
+	RemoveDLLElement(TestList, 1);
+	RemoveDLLElement(TestList, 3);
+	RemoveDLLElement(TestList, TestList->CurrentElementCount);
+
+	printf("Display Elements : ");
+	DisplayDLListElements(TestList);
+
+
+	DeleteDLList(TestList);
+	printf("\nDone\n");
+
+	return 0;
+}
