@@ -53,5 +53,9 @@ int main(void)
 	for (int i = 1; i <= TestList->CurrentElementCount; i++)
 		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
 
+	DeleteSingleLinkedList(TestList);
+
+	printf("Done\n");
+
 	return 0;
 }
