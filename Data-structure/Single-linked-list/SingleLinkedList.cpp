@@ -25,20 +25,18 @@ SingleLinkedList* CreateSingleLinkedList()
 
 void DeleteSingleLinkedList(SingleLinkedList* List)
 {
-	SingleLinkedListNode* Node = NULL;
+	SingleLinkedListNode* CurrentNode = List->HeaderNode.pLink;
+	SingleLinkedListNode* NextNode = NULL;
+
 	if (List != NULL)
 	{
-		for (int j = 0; j < List->CurrentElementCount; j++)
+		for (int i = 0; i < List->CurrentElementCount; i++)
 		{
-			Node= &(List->HeaderNode);
-			for (int i = 0; i < List->CurrentElementCount - 1; i++)
-			{
-				Node->pLink = Node->pLink->pLink;
-			}
-			memset(Node->pLink, 0, sizeof(SingleLinkedListNode));
-			free(Node->pLink);
-			List->CurrentElementCount--;
+			NextNode = CurrentNode->pLink;
+			free(CurrentNode);
+			CurrentNode = NextNode;
 		}
+		free(List);
 	}
 	else
 	{
