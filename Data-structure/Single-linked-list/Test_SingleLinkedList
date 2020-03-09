@@ -1,0 +1,57 @@
+#include "SingleLinkedList.h"
+#include <stdio.h>
+
+#define Num_OF_Element 5
+
+int main(void)
+{
+	SingleLinkedList* TestList = CreateSingleLinkedList();
+	printf("the list is created successfully\n\n");
+	printf("List Length is %d\n", GetSingleLinkedListLength(TestList));
+	printf("Is List empty? %d \n", IsSingleLinkedListEmpty(TestList));
+
+	printf("\nAdd elements to list/ 1 2 3 4 5\n");
+	for (int i = 1; i <= Num_OF_Element; i++)
+		printf("%d\n", AddSingleLinkedListElement(TestList, i, i));
+
+	printf("\nList Length is %d\n", GetSingleLinkedListLength(TestList));
+	printf("Is List empty? %d \n", IsSingleLinkedListEmpty(TestList));
+	printf("Check elements in the list\n");
+	for (int i = 1; i <= TestList->CurrentElementCount; i++)
+		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
+
+	printf("\nRemove second element\n");
+	RemoveSingleLinkedListElement(TestList, 2);
+	printf("List Length is %d\n", GetSingleLinkedListLength(TestList));
+	printf("Is List empty? %d \n", IsSingleLinkedListEmpty(TestList));
+
+	printf("Check elements in the list\n");
+	for (int i = 1; i <= TestList->CurrentElementCount; i++)
+		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
+
+	printf("\nRemove last element\n");
+	RemoveSingleLinkedListElement(TestList, TestList->CurrentElementCount);
+	printf("List Length is %d\n", GetSingleLinkedListLength(TestList));
+	printf("Is List empty? %d \n", IsSingleLinkedListEmpty(TestList));
+	printf("Check elements in the list\n");
+	for (int i = 1; i <= TestList->CurrentElementCount; i++)
+		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
+	
+	printf("\nRemove first element\n");
+	RemoveSingleLinkedListElement(TestList, 1);
+	printf("List Length is %d\n", GetSingleLinkedListLength(TestList));
+	printf("Is List empty? %d \n", IsSingleLinkedListEmpty(TestList));
+	printf("Check elements in the list\n");
+	for (int i = 1; i <= TestList->CurrentElementCount; i++)
+		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
+
+	printf("\nAdd element at second position\n");
+	AddSingleLinkedListElement(TestList, 2, 6);
+	printf("Add element at first position\n");
+	AddSingleLinkedListElement(TestList, 1, 7);
+	printf("Check elements in the list\n");
+	for (int i = 1; i <= TestList->CurrentElementCount; i++)
+		printf("Element %d is %d\n", i, GetSingleLinkedListElement(TestList, i));
+
+	return 0;
+}
