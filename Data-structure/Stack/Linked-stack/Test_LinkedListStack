@@ -1,0 +1,42 @@
+#include "Linked_list_stack.h"
+#include <stdio.h>
+
+int main(void)
+{
+	LinkedStack* TestStack = CreateLinkedStack();
+
+	LinkedStackNode TestNode_1 = { 0 };
+	LinkedStackNode TestNode_2 = { 0 };
+	LinkedStackNode TestNode_3 = { 0 };
+	LinkedStackNode TestNode_4 = { 0 };
+
+	TestNode_1.StackData.data = 1;
+	TestNode_2.StackData.data = 2;
+	TestNode_3.StackData.data = 3;
+	TestNode_4.StackData.data = 4;
+
+	LinkedStackPush(TestStack, &TestNode_1);
+	LinkedStackPush(TestStack, &TestNode_2);
+	LinkedStackPush(TestStack, &TestNode_3);
+	LinkedStackPush(TestStack, &TestNode_4);
+
+	LinkedStackInfo(TestStack);
+
+	int pop_output = 0;
+	pop_output = LinkedStackPop(TestStack);
+	printf("Pop result : %d\n\n", pop_output);
+	pop_output = LinkedStackPop(TestStack);
+	printf("Pop result : %d\n\n", pop_output);
+	
+	LinkedStackInfo(TestStack);
+
+	int peak_output = 0;
+	peak_output = LinkedStackPeak(TestStack);
+	printf("Peak result : %d", peak_output);
+	LinkedStackInfo(TestStack);
+
+
+	DeleteLinkedStack(TestStack);
+
+	return 0;
+}
