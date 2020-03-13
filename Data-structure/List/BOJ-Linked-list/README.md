@@ -22,4 +22,3 @@ N과 K가 주어지면 (N, K)-요세푸스 순열을 구하는 프로그램을 �
 이렇게 생각했다.
 
 '그리고 링크드리스트를 구현해보고싶다!' 가 아니라면 나쁜 생각이다.
-![텍스트](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FcfNLsM%2FbtqCKgYTWdT%2FZFXzR5NIE1eKuu3T1O9oZ0%2Fimg.png)
