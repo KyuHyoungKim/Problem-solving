@@ -13,7 +13,9 @@ void InsertBT(BinTreeNode** Tree, int Val);
 BinTreeNode* SearchBT(BinTreeNode* Tree, int Val);
 void DeleteBT(BinTreeNode* Tree);
 void DeleteNodeBT(BinTreeNode* Tree, int val);
-void PrintBT(BinTreeNode* Tree);
+void PreorderTraversalBT(BinTreeNode* Tree);
+void PostorderTraversalBT(BinTreeNode* Tree);
+void InorderTraversalBT(BinTreeNode* Tree);
 
 int main(void)
 {
@@ -31,13 +33,17 @@ int main(void)
 	InsertBT(&Tree, 7);
 	InsertBT(&Tree, 8);
 	
-	printf("Print Binary Tree\n");
-	PrintBT(Tree);
+	printf("Preorder Traversal\n");
+	PreorderTraversalBT(Tree);
+	printf("Postorder Traversal\n");
+	PostorderTraversalBT(Tree);	
+	printf("Inorder Traversal\n");
+	InorderTraversalBT(Tree);
 
 	DeleteNodeBT(Tree, 9);
 
 	printf("Print Binary Tree\n");
-	PrintBT(Tree);
+	PreorderTraversalBT(Tree);
 
 	DeleteBT(Tree);
 	return 0;
@@ -139,13 +145,33 @@ void DeleteNodeBT(BinTreeNode* Tree, int val)
 	}
 }
 
-void PrintBT(BinTreeNode* Tree)
+void PreorderTraversalBT(BinTreeNode* Tree)
 {
 	BinTreeNode* temp = Tree;
 	if (Tree)
 	{
 		printf("%d\n", temp->Data);
-		PrintBT(temp->pLeft);
-		PrintBT(temp->pRight);
+		PreorderTraversalBT(temp->pLeft);
+		PreorderTraversalBT(temp->pRight);
+	}
+}
+
+void PostorderTraversalBT(BinTreeNode* Tree)
+{
+	if (Tree)
+	{
+		PostorderTraversalBT(Tree->pLeft);
+		PostorderTraversalBT(Tree->pRight);
+		printf("%d\n", Tree->Data);
+	}
+}
+
+void InorderTraversalBT(BinTreeNode* Tree)
+{
+	if (Tree)
+	{
+		InorderTraversalBT(Tree->pLeft);
+		printf("%d\n", Tree->Data);
+		InorderTraversalBT(Tree->pRight);
 	}
 }
