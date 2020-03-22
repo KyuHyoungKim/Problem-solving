@@ -51,26 +51,31 @@ int main(void)
 BinaryTree* CreateCBT(int MaxNumofNode)
 {
 	BinaryTree* pReturn = NULL;
-
-	pReturn = (BinaryTree*)malloc(sizeof(BinaryTree));
-	if (pReturn)
+	if (MaxNumofNode > 0)
 	{
-		memset(pReturn, 0, sizeof(BinaryTree));
-		pReturn->Node = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode) * (MaxNumofNode + 1));
-		if (pReturn->Node)
+		pReturn = (BinaryTree*)malloc(sizeof(BinaryTree));
+		if (pReturn)
 		{
-			memset(pReturn->Node, 0, sizeof(BinaryTreeNode) * (MaxNumofNode + 1));
-			pReturn->MaxNodeCount = MaxNumofNode;
+			memset(pReturn, 0, sizeof(BinaryTree));
+			pReturn->Node = (BinaryTreeNode*)malloc(sizeof(BinaryTreeNode) * (MaxNumofNode + 1));
+			if (pReturn->Node)
+			{
+				memset(pReturn->Node, 0, sizeof(BinaryTreeNode) * (MaxNumofNode + 1));
+				pReturn->MaxNodeCount = MaxNumofNode;
+			}
+			else
+			{
+				printf("Dynamic allocation error 2 : CreateCBT\n");
+				free(pReturn);
+				pReturn = NULL;
+			}
 		}
 		else
-		{
-			printf("Dynamic allocation error 2 : CreateCBT\n");
-			free(pReturn);
-			pReturn = NULL;
-		}
+			printf("Dynamic allocation error : CreateBT\n");
 	}
 	else
-		printf("Dynamic allocation error : CreateBT\n");
+		printf("MaxNum index error : CreateCBT\n");
+
 	return pReturn;
 }
 
