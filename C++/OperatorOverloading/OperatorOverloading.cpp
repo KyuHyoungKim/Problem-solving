@@ -35,9 +35,11 @@ int main(void)
 	Point B(5, 10);
 	Point C = A + B;
 	Point D = A + 3;
+	Point E = A;
 	A.Display();
 	B.Display();
 	C.Display();
 	D.Display();
+	E.Display();
 	return 0;
 }
