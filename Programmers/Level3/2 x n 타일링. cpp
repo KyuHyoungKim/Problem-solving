@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+long long dp[60001]={0};
+
+int Tiling(int N)
+{
+    long long temp=0;
+    if(dp[N])
+        return dp[N];
+    else if(N==1)
+        return 1;
+    else if(N==2)
+        return 2;
+    else
+    {   
+        temp = (Tiling(N-1)+Tiling(N-2))%1000000007;
+        dp[N]=temp;
+        return temp;
+    }
+}
+
+int solution(int n) {
+    int answer = 0;
+    answer=Tiling(n);
+    return answer;
+}
