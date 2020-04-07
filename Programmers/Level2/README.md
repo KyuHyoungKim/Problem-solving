@@ -97,3 +97,13 @@
   - ###### 조건의 n이 100,000까지 가능하므로 효율성을 위해 DP로 접근
 
 - #### 최솟값 만들기
+
+- #### 최댓값과 최솟값
+  - ###### c++의 string를 c의 strtok함수를 통해 tokenize해서 string 안의 정수들을 추출
+    ###### c의 strtok함수는 string 클래스를 못받고 char\*을 받기 때문에, string을 char\*로 변환하는 과정이 필요했다. 
+    ###### 찾아보니 string을 char의 문자열로 변환하는 함수는 string.data()함수와 string.c_str()함수가 있는데,
+    ###### data함수는 string 안의 내용을 그대로 복사해주고, c_str()함수는 c의 문자열 처럼 마지막에 널 문자를 붙여준다.
+    ###### 그렇기 때문에 c의 함수를 사용하기 위해 string을 변환하는 경우 c_str()이 선호됨
+    ###### data함수와 c_str함수 모두 const char\*을 반환하는데, strtok는 char\*를 받기 때문에,
+    ###### char\*에 string의 사이즈+1만큼 동적할당 해주고 strcpy로 내용을 복사해서 사용했다.
+    
