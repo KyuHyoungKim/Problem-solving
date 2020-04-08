@@ -30,3 +30,12 @@ int solution(vector<int> arr) {
     ret = temp;
     return ret;
 }
+
+// 유클리드 호제법
+int Max_Common_Factor2(int num1, int num2)
+{
+    if (num1 % num2 == 0)
+        return num2;
+    else
+        return Max_Common_Factor(num2, num1 % num2);
+}
