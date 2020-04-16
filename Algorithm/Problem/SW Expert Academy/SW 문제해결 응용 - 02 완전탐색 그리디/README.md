@@ -6,6 +6,7 @@
   - ###### 이분탐색으로 풀이
 
 #### 처음 풀이 코드
+```
 double solution(vector<int> pos, vector<int> mass, int cnt)
 {
 	int Mass_Sum_1 = 0, Mass_Sum_2 = 0;
@@ -25,4 +26,4 @@ double solution(vector<int> pos, vector<int> mass, int cnt)
 	
 	return Pos_Mean_1 + (Pos_Mean_2 - Pos_Mean_1) / (sqrt((double)Mass_Sum_2 / Mass_Sum_1) + 1);
 }
-
+```
