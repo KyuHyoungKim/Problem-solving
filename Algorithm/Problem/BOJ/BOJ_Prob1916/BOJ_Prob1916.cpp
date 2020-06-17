@@ -26,15 +26,15 @@ int main() {
 		int now = pq.top().first;
 		int cost = pq.top().second;
 		pq.pop();
-		if (res[now] < cost)
-			continue;
-		else
-			res[now] = cost;
+
+		if (res[now] < cost) continue;
+		else res[now] = cost;
+
+		if (now == end) break;
 
 		for (int i = 0; i < gra[now].size(); i++) {
 			int next = gra[now][i].first;
 			int next_cost = gra[now][i].second + cost;
-
 			if (res[next] > next_cost) {
 				pq.push(make_pair(next, next_cost));
 			}
