@@ -2,20 +2,20 @@
 #include <cstdio>
 #include <vector>
 using namespace std;
-vector<int> pre_order, in_order, in_index, post_order;
-void print_post_order(int pre_start, int pre_end, int in_start, int in_end, int post_start, int post_end) {
-	if (pre_start > pre_end || in_start > in_end || post_start > post_end) return;
+vector<int> pre_order, in_index;
+void print_post_order(int pre_start, int pre_end, int in_start, int in_end) {
+	if (pre_start > pre_end || in_start > in_end) return;
 	int root = pre_order[pre_start];
 	int in_root_idx = in_index[root];
-	post_order[post_end] = root;
+
 	print_post_order(
 		pre_start + 1, pre_start + in_root_idx - in_start,
-		in_start, in_root_idx - 1,
-		post_start, post_start + in_root_idx - in_start - 1);
+		in_start, in_root_idx - 1);
 	print_post_order(
 		pre_start + 1 + in_root_idx - in_start, pre_end,
-		in_root_idx + 1, in_end,
-		post_start + in_root_idx - in_start, post_end - 1);
+		in_root_idx + 1, in_end);
+
+	printf("%d ", root);
 }
 
 int main() {
@@ -24,24 +24,17 @@ int main() {
 	scanf("%d", &T);
 	while (T--) {
 		scanf("%d", &N);
-		pre_order.resize(N);
-		in_order.resize(N);
-		in_index.resize(N);
-		post_order.resize(N);
-		for (int i = 0; i < N; i++) {
-			scanf("%d", &pre_order[i]);
-			pre_order[i]--;
-		}
-		for (int i = 0; i < N; i++) {
-			scanf("%d", &in_order[i]);
-			in_order[i]--;
-		}
-		for (int i = 0; i < N; i++)
-			in_index[in_order[i]] = i;
+		pre_order.resize(N + 1);
+		in_index.resize(N + 1);
+		for (int i = 0; i < N; i++) scanf("%d", &pre_order[i]);
 
-		print_post_order(0, N - 1, 0, N - 1, 0, N - 1);
-		for (int i = 0; i < N; i++)
-			printf("%d ", post_order[i] + 1);
+		for (int i = 0; i < N; i++) {
+			int temp;
+			scanf("%d", &temp);
+			in_index[temp] = i;
+		}
+
+		print_post_order(0, N - 1, 0, N - 1);
 		printf("\n");
 	}
 	return 0;
