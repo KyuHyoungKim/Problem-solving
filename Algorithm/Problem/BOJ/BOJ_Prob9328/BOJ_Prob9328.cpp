@@ -5,29 +5,25 @@
 #include <queue>
 using namespace std;
 
-int h, w;
+int T, h, w, res = 0, dy[4] = { 0,0,-1,1 }, dx[4] = { 1,-1,0,0 };
 vector<string> maps;
 string keys;
 vector<vector<pair<int, int>>> doors;
 vector<vector<bool>> checked;
+queue<pair<int, int>> q;
 
 bool is_walls(int Y, int X);
 queue<pair<int, int>> check_entrance();
 void check_keys (queue<pair<int, int>>& q);
+void init();
+void search_doc();
 
 int main() {
 	freopen("input.txt", "r", stdin);
-	int T, dy[4] = { 0,0,-1,1 }, dx[4] = { 1,-1,0,0 };
 	scanf("%d", &T);
 	while (T--) {
-		int res = 0;
 		scanf("%d %d", &h, &w);
-
-		maps.resize(h);
-		keys.clear();
-		vector<vector<pair<int, int>>> doors_init('Z' - 'A' + 1); doors.swap(doors_init);
-		vector<vector<bool>> checked_init(h, vector<bool>(w, false)); checked.swap(checked_init);
-		queue<pair<int, int>> q;
+		init();
 
 		for (int i = 0; i < h; i++) {
 			cin >> maps[i];
@@ -40,44 +36,14 @@ int main() {
 		cin >> keys;
 		if (keys == "0") keys.clear();
 		check_keys(q);
-
-		while (!q.empty())
-		{
-			while (!q.empty())
-			{
-				int now_y = q.front().first;
-				int now_x = q.front().second;
-				checked[now_y][now_x] = true;
-				if (maps[now_y][now_x] >= 'a' && maps[now_y][now_x] <= 'z') {
-					keys.push_back(maps[now_y][now_x]);
-					maps[now_y][now_x] = '.';
-				}
-				if (maps[now_y][now_x] == '$') {
-					res++;
-					maps[now_y][now_x] = '.';
-				}
-				q.pop();
-
-				for (int i = 0; i < 4; i++) {
-					int Y = now_y + dy[i];
-					int X = now_x + dx[i];
-
-					if (Y < 0 || Y >= h || X < 0 || X >= w || checked[Y][X]) continue;
-
-					if (maps[Y][X] != '*' && (maps[Y][X] < 'A' || maps[Y][X] > 'Z'))
-						q.push(make_pair(Y, X));
-					checked[Y][X] = true;
-				}
-			}
-			check_keys(q);
-		}
+		search_doc();
 		printf("%d\n", res);
 	}
 	return 0;
 }
 
 bool is_walls(int Y, int X) {
-bool ret = true;
+	bool ret = true;
 	if (maps[Y][X] != '*' && (maps[Y][X] < 'A' || maps[Y][X] > 'Z'))
 		ret = false;
 	return ret;
@@ -113,4 +79,49 @@ void check_keys(queue<pair<int, int>>& q) {
 		doors[idx].clear();
 	}
 	keys.clear();
+	return;
+}
+
+void init() {
+	maps.resize(h);
+	keys.clear();
+	vector<vector<pair<int, int>>> doors_init('Z' - 'A' + 1); doors.swap(doors_init);
+	vector<vector<bool>> checked_init(h, vector<bool>(w, false)); checked.swap(checked_init);
+	queue<pair<int, int>> q_init; q.swap(q_init);
+	res = 0;
+
+	return;
+}
+
+void search_doc() {
+	while (!q.empty())
+	{
+		while (!q.empty())
+		{
+			int now_y = q.front().first;
+			int now_x = q.front().second;
+			checked[now_y][now_x] = true;
+			if (maps[now_y][now_x] >= 'a' && maps[now_y][now_x] <= 'z') {
+				keys.push_back(maps[now_y][now_x]);
+				maps[now_y][now_x] = '.';
+			}
+			if (maps[now_y][now_x] == '$') {
+				res++;
+				maps[now_y][now_x] = '.';
+			}
+			q.pop();
+
+			for (int i = 0; i < 4; i++) {
+				int Y = now_y + dy[i];
+				int X = now_x + dx[i];
+
+				if (Y < 0 || Y >= h || X < 0 || X >= w || checked[Y][X]) continue;
+
+				if (maps[Y][X] != '*' && (maps[Y][X] < 'A' || maps[Y][X] > 'Z'))
+					q.push(make_pair(Y, X));
+				checked[Y][X] = true;
+			}
+		}
+		check_keys(q);
+	}
 }
