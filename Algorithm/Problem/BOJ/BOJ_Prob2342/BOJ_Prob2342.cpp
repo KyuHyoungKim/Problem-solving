@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define INF 1234567891
 #include <cstdio>
 #include <vector>
 #include <algorithm>
@@ -27,28 +28,17 @@ int main() {
 		int num = nums[i];
 		for (int a = 0; a < 5; a++)
 			for (int b = 0; b < 5; b++) {
-				if (!DP[i - 1][a][b])
+				if (DP[i - 1][a][b] == INF)
 					continue;
-				if (!DP[i][a][num])
-					DP[i][a][num] = DP[i - 1][a][b] + cost[b][num];
-				else
-					DP[i][a][num] = min(DP[i][a][num], DP[i - 1][a][b] + cost[b][num]);
-
-				if (!DP[i][num][b])
-					DP[i][num][b] = DP[i - 1][a][b] + cost[a][num];
-				else
-					DP[i][num][b] = min(DP[i][num][b], DP[i - 1][a][b] + cost[a][num]);
-
+				DP[i][a][num] = min(DP[i][a][num], DP[i - 1][a][b] + cost[b][num]);
+				DP[i][num][b] = min(DP[i][num][b], DP[i - 1][a][b] + cost[a][num]);
 			}
 	}
 
 	for (int i = 0; i < 5; i++)
-		for (int j = 0; j < 5; j++) {
-			int a = DP[N - 1][i][j];
-			if (!a)
-				continue;
-			res = min(res, a);
-		}
+		for (int j = 0; j < 5; j++) 
+			res = min(res, DP[N - 1][i][j]);
+
 	printf("%d", res);
 	return 0;
 }
@@ -61,6 +51,6 @@ void init(int& N, vector<int>& nums, vector<vector<vector<int>>>& DP) {
 	}
 	nums.pop_back();
 	N = nums.size();
-	vector<vector<vector<int>>> DP_init(N, vector<vector<int>>(5, vector<int>(5)));
+	vector<vector<vector<int>>> DP_init(N, vector<vector<int>>(5, vector<int>(5, INF)));
 	DP.swap(DP_init);
 }
